@@ -182,8 +182,8 @@ info:
     email: info@ferris.ai
     name: Ferris Solutions AG
     url: http://ferris.ai/
-  description: API definition for ferris.ai None ipt JSC & TZI
-  title: ferris.ai None ipt JSC & TZI
+  description: API definition for ferris.ai None jsctzi
+  title: ferris.ai None jsctzi
   version: 1.0.0
 openapi: 3.0.1
 paths:

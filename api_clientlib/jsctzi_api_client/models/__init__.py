@@ -2,9 +2,9 @@
 
 # flake8: noqa
 """
-    ferris.ai None ipt JSC & TZI
+    ferris.ai None jsctzi
 
-    API definition for ferris.ai None ipt JSC & TZI  # noqa: E501
+    API definition for ferris.ai None jsctzi  # noqa: E501
 
     OpenAPI spec version: 1.0.0
     Contact: info@ferris.ai
