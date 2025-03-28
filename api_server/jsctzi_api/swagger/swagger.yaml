@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: ferris.ai None ipt JSC & TZI
-  description: API definition for ferris.ai None ipt JSC & TZI
+  title: ferris.ai None jsctzi
+  description: API definition for ferris.ai None jsctzi
   contact:
     name: Ferris Solutions AG
     url: http://ferris.ai/

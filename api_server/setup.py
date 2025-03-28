@@ -20,10 +20,10 @@ REQUIRES = [
 setup(
     name=NAME,
     version=VERSION,
-    description="ferris.ai None ipt JSC &amp; TZI",
+    description="ferris.ai None jsctzi",
     author_email="info@ferris.ai",
     url="",
-    keywords=["Swagger", "ferris.ai None ipt JSC &amp; TZI"],
+    keywords=["Swagger", "ferris.ai None jsctzi"],
     install_requires=REQUIRES,
     packages=find_packages(),
     package_data={'': ['swagger/swagger.yaml']},
@@ -31,6 +31,6 @@ setup(
     entry_points={
         'console_scripts': ['jsctzi_api=jsctzi_api.__main__:main']},
     long_description="""\
-    API definition for ferris.ai None ipt JSC &amp; TZI
+    API definition for ferris.ai None jsctzi
     """
 )
