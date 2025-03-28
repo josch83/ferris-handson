@@ -3,7 +3,7 @@
 import sys
 from setuptools import setup, find_packages
 
-NAME = "josch83_api"
+NAME = "jsctzi_api"
 VERSION = "1.0.0"
 # To install the library, run the following
 #
@@ -20,17 +20,17 @@ REQUIRES = [
 setup(
     name=NAME,
     version=VERSION,
-    description="ferris.ai ipt JSC &amp; TZI",
+    description="ferris.ai None ipt JSC &amp; TZI",
     author_email="info@ferris.ai",
     url="",
-    keywords=["Swagger", "ferris.ai ipt JSC &amp; TZI"],
+    keywords=["Swagger", "ferris.ai None ipt JSC &amp; TZI"],
     install_requires=REQUIRES,
     packages=find_packages(),
     package_data={'': ['swagger/swagger.yaml']},
     include_package_data=True,
     entry_points={
-        'console_scripts': ['josch83_api=josch83_api.__main__:main']},
+        'console_scripts': ['jsctzi_api=jsctzi_api.__main__:main']},
     long_description="""\
-    API definition for ferris.ai ipt JSC &amp; TZI
+    API definition for ferris.ai None ipt JSC &amp; TZI
     """
 )

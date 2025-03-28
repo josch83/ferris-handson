@@ -23,7 +23,7 @@ The buildin-requirements.txt are already build into the docker base image
 ```
 pip3 install -r buildin-requirements.txt
 pip3 install -r requirements.txt
-python3 -m josch83_api
+python3 -m jsctzi_api
 ```
 
 and open your browser to here:
@@ -51,8 +51,8 @@ To run the server on a Docker container, please execute the following from the r
 ```bash
 
 # building the image
-docker build --platform linux/amd64 -t josch83_api .
+docker build --platform linux/amd64 -t jsctzi_api .
 
 # starting up a container
-docker run -p 8080:8080 josch83_api
+docker run -p 8080:8080 jsctzi_api
 ```
