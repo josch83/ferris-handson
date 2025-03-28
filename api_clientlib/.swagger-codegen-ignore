@@ -21,8 +21,8 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
-josch83_api/controllers
-# josch83_api/__main__.py
+jsctzi_api/controllers
+# jsctzi_api/__main__.py
 .swagger-codegen-ignore
 git_push.sh
 model.yaml

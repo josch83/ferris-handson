@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    ferris.ai ipt JSC & TZI
+    ferris.ai None ipt JSC & TZI
 
-    API definition for ferris.ai ipt JSC & TZI  # noqa: E501
+    API definition for ferris.ai None ipt JSC & TZI  # noqa: E501
 
     OpenAPI spec version: 1.0.0
     Contact: info@ferris.ai
@@ -14,9 +14,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import josch83_api_client
-from josch83_api_client.models.user_account import UserAccount  # noqa: E501
-from josch83_api_client.rest import ApiException
+import jsctzi_api_client
+from jsctzi_api_client.models.user_account import UserAccount  # noqa: E501
+from jsctzi_api_client.rest import ApiException
 
 
 class TestUserAccount(unittest.TestCase):
@@ -31,7 +31,7 @@ class TestUserAccount(unittest.TestCase):
     def testUserAccount(self):
         """Test UserAccount"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = josch83_api_client.models.user_account.UserAccount()  # noqa: E501
+        # model = jsctzi_api_client.models.user_account.UserAccount()  # noqa: E501
         pass
 
 

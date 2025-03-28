@@ -1,4 +1,4 @@
-# josch83_api_client.AddressApi
+# jsctzi_api_client.AddressApi
 
 All URIs are relative to */*
 
@@ -20,19 +20,19 @@ Create a new address with new id and provided data
 ```python
 from __future__ import print_function
 import time
-import josch83_api_client
-from josch83_api_client.rest import ApiException
+import jsctzi_api_client
+from jsctzi_api_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: sso_auth
-configuration = josch83_api_client.Configuration()
+configuration = jsctzi_api_client.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = josch83_api_client.AddressApi(josch83_api_client.ApiClient(configuration))
-body = josch83_api_client.Address() # Address | 
+api_instance = jsctzi_api_client.AddressApi(jsctzi_api_client.ApiClient(configuration))
+body = jsctzi_api_client.Address() # Address | 
 
 try:
     # Create a new address
@@ -74,18 +74,18 @@ Get a address by ID
 ```python
 from __future__ import print_function
 import time
-import josch83_api_client
-from josch83_api_client.rest import ApiException
+import jsctzi_api_client
+from jsctzi_api_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: sso_auth
-configuration = josch83_api_client.Configuration()
+configuration = jsctzi_api_client.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = josch83_api_client.AddressApi(josch83_api_client.ApiClient(configuration))
+api_instance = jsctzi_api_client.AddressApi(jsctzi_api_client.ApiClient(configuration))
 oid = 56 # int | address ID
 
 try:
@@ -128,18 +128,18 @@ Get all address IDs and names
 ```python
 from __future__ import print_function
 import time
-import josch83_api_client
-from josch83_api_client.rest import ApiException
+import jsctzi_api_client
+from jsctzi_api_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: sso_auth
-configuration = josch83_api_client.Configuration()
+configuration = jsctzi_api_client.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = josch83_api_client.AddressApi(josch83_api_client.ApiClient(configuration))
+api_instance = jsctzi_api_client.AddressApi(jsctzi_api_client.ApiClient(configuration))
 offset = 56 # int | Offset for start of  returned records (optional)
 limit = 56 # int | Limit the amount of returned records (optional)
 order_by = 'order_by_example' # str | Column used for sorting. The format is [+|-]<column_name> (optional)
@@ -240,19 +240,19 @@ Update the address with the provided data
 ```python
 from __future__ import print_function
 import time
-import josch83_api_client
-from josch83_api_client.rest import ApiException
+import jsctzi_api_client
+from jsctzi_api_client.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: sso_auth
-configuration = josch83_api_client.Configuration()
+configuration = jsctzi_api_client.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = josch83_api_client.AddressApi(josch83_api_client.ApiClient(configuration))
-body = josch83_api_client.Address() # Address | 
+api_instance = jsctzi_api_client.AddressApi(jsctzi_api_client.ApiClient(configuration))
+body = jsctzi_api_client.Address() # Address | 
 oid = 56 # int | address ID
 
 try:

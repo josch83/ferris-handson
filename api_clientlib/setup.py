@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    ferris.ai ipt JSC & TZI
+    ferris.ai None ipt JSC & TZI
 
-    API definition for ferris.ai ipt JSC & TZI  # noqa: E501
+    API definition for ferris.ai None ipt JSC & TZI  # noqa: E501
 
     OpenAPI spec version: 1.0.0
     Contact: info@ferris.ai
@@ -12,7 +12,7 @@
 
 from setuptools import setup, find_packages  # noqa: H301
 
-NAME = "josch83-api-client"
+NAME = "jsctzi-api-client"
 VERSION = "1.0.0"
 # To install the library, run the following
 #
@@ -26,14 +26,14 @@ REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
 setup(
     name=NAME,
     version=VERSION,
-    description="ferris.ai ipt JSC &amp; TZI",
+    description="ferris.ai None ipt JSC &amp; TZI",
     author_email="info@ferris.ai",
     url="None/api_clientlib/",
-    keywords=["Swagger", "ferris.ai ipt JSC &amp; TZI"],
+    keywords=["Swagger", "ferris.ai None ipt JSC &amp; TZI"],
     install_requires=REQUIRES,
     packages=find_packages(),
     include_package_data=True,
     long_description="""\
-    API definition for ferris.ai ipt JSC &amp; TZI  # noqa: E501
+    API definition for ferris.ai None ipt JSC &amp; TZI  # noqa: E501
     """
 )

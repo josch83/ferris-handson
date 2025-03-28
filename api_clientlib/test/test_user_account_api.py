@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    ferris.ai ipt JSC & TZI
+    ferris.ai None ipt JSC & TZI
 
-    API definition for ferris.ai ipt JSC & TZI  # noqa: E501
+    API definition for ferris.ai None ipt JSC & TZI  # noqa: E501
 
     OpenAPI spec version: 1.0.0
     Contact: info@ferris.ai
@@ -14,9 +14,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import josch83_api_client
-from josch83_api_client.api.user_account_api import UserAccountApi  # noqa: E501
-from josch83_api_client.rest import ApiException
+import jsctzi_api_client
+from jsctzi_api_client.api.user_account_api import UserAccountApi  # noqa: E501
+from jsctzi_api_client.rest import ApiException
 
 
 class TestUserAccountApi(unittest.TestCase):
