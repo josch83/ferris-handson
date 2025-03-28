@@ -1,0 +1,71 @@
+<div class="modal fade hmodal-info" id="json-data-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" id="log-modal-header"></h3>
+                <small class="font-bold modal-description"></small>
+            </div>
+
+            <div class="modal-body">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".show-json-data").on("click", function () {
+
+        var json_data = $(this).data("json");
+
+        if (json_data == undefined) {
+            json_data = $(this).siblings('.data-holder').text();
+        } else {
+            json_data = JSON.stringify(json_data);
+        }
+
+
+        $("#json-data-modal .modal-title").text($(this).data("title"));
+        $("#json-data-modal .modal-description").text($(this).data("description"));
+        $("#json-data-modal .modal-body").html("<textarea id='json-modal-content' class='form-control empty' rows='30' style='height: 600px'></textarea>");
+        $("#json-modal-content").text(json_data);
+
+        setTimeout(
+            function () {
+                var textarea = document.getElementById("json-modal-content");
+
+                editor = CodeMirror.fromTextArea(textarea, {
+                    lineNumbers: true,
+                    matchBrackets: true,
+                    readOnly: true,
+                    theme: 'readOnly',
+                    styleActiveLine: true,
+                    mode: {"name": "javascript", "json": true},
+                    tabMode: "indent",
+                    height: 600
+                });
+
+                var totalLines = editor.lineCount() + 10;
+                editor.autoFormatRange({line: 0, ch: 0}, {line: totalLines});
+                editor.setCursor({line: 0, ch: 0})
+
+                $("#json-modal-body textarea").removeClass('empty');
+            },
+            500
+        )
+    });
+
+    $('#json-data-modal').on('hidden.bs.modal', function (e) {
+        $("#json-modal-body").html()
+    })
+</script>
+
+<style>
+    #json-modal-body textarea.empty {color: transparent;}
+</style>

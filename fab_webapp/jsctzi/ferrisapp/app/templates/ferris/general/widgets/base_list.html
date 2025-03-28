@@ -1,0 +1,61 @@
+{% import 'ferris/general/lib.html' as lib %}
+
+{% set can_add = "can_add" | is_item_visible(modelview_name) %}
+{% set can_show = "can_show" | is_item_visible(modelview_name) %}
+{% set can_edit = "can_edit" | is_item_visible(modelview_name) %}
+{% set can_delete = "can_delete" | is_item_visible(modelview_name) %}
+{% set actions = actions | get_actions_on_list(modelview_name) %}
+
+<div class="border-bottom">
+    <br>
+    {% block list_header scoped %}
+    
+        {% if widget_data is defined and widget_data.permissions_per_item and widget_data.permissions_per_item[modelview_name] is defined and
+                'overall' in widget_data.permissions_per_item[modelview_name] %}
+            {% if widget_data.is_admin == true %}
+                {{ lib.render_list_header(can_add, page, page_size, count, filters, actions, modelview_name) }}
+            {% else %}
+                {{ lib.render_list_header(widget_data.permissions_per_item[modelview_name]['overall'].can_add, page, page_size, count, filters, actions, modelview_name) }}
+            {% endif %}
+        {% else %}
+            {{ lib.render_list_header(can_add, page, page_size, count, filters, actions, modelview_name) }}
+        {% endif %}
+
+    {% endblock %}
+    <br>
+    <br>
+</div>
+
+{% if count > 0 %}
+
+    {% block begin_content scoped %}
+    {% endblock %}
+
+    {% block begin_loop_header scoped %}
+    {% endblock %}
+
+    {% block begin_loop_values %}
+    {% endblock %}
+
+    {% block end_content scoped %}
+    {% endblock %}
+
+    {{ lib.action_form(actions, modelview_name) }}
+
+    <script language="javascript">
+        $(document).ready(function() {
+            window.modelActions = new AdminActions();
+        });
+    </script>
+
+{% else %}
+    <div style="padding: 10px;">
+        <b>{{_("No records found")}}</b>
+    </div>
+
+{% endif %}
+
+<div class="border-top">
+    <br>
+    {{ lib.lnk_back() }}
+</div>

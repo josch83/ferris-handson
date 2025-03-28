@@ -1,0 +1,31 @@
+{% extends base_template %}
+{% import 'ferris/baselib.html' as ferrisbaselib %}
+{% import 'ferris/general/lib.html' as lib %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            {{ lib.panel_begin(title)}}
+
+            {% block list_search scoped %}
+                {% call lib.accordion_tag("accordion1",_("Search"), False) %}
+                    {{ widgets.get('search')()|safe }}
+                {% endcall %}
+            {% endblock %}
+
+            {% block list_list scoped %}
+                <div>
+                    <!-- {% if list_widget_data is defined %}
+                        {{ widgets.get('list')(widget_data=list_widget_data)|safe }}
+                    {% else %} -->
+                        {{ widgets.get('list')()|safe }}
+                    <!-- {% endif %} -->
+                </div>
+            {% endblock %}
+
+            {{ lib.panel_end() }}
+        </div>
+    </div>
+
+{% endblock %}

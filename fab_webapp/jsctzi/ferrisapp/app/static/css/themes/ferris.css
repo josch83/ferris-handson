@@ -1,0 +1,118 @@
+table tr td span a { text-decoration: underline; color: #448086; }
+
+.color-line { background: #B81414; }
+.hmodal-primary .color-line { background: #2F4858; }
+.hmodal-primary2 .color-line { background: #273e47; }
+.hmodal-info .color-line { background: #448086; }
+.hmodal-success .color-line { background: #156C00; }
+.hmodal-warning .color-line { background: #9C5500; }
+.hmodal-danger .color-line { background: #B81414; }
+.hmodal-white .color-line { background: #FFFFFF; }
+
+.hmodal-primary h4.modal-title { color: #2F4858; }
+.hmodal-primary2 h4.modal-title { color: #273e47; }
+.hmodal-info h4.modal-title { color: #448086; }
+.hmodal-success h4.modal-title { color: #156C00; }
+.hmodal-warning h4.modal-title { color: #9C5500; }
+.hmodal-danger h4.modal-title { color: #B81414; }
+.hmodal-white h4.modal-title { color: #FFFFFF; }
+
+#logo.light-version span, .header-link, .navbar.navbar-static-top a, .nav.navbar-nav li a { color: #B81414 !important; }
+
+.text-primary { color:  #2F4858 !important; } /* 273e47 */
+.text-primary-2 { color:  #273e47 !important; }
+.text-info { color:  #448086 !important; }
+.text-success { color:  #156C00 !important; }
+.text-warning { color:  #9C5500 !important; }  /* #bd632f */ /* #d8973c */
+.text-danger { color:  #B81414 !important; }
+.text-white { color:  #FFFFFF !important; }
+
+a {
+    color:  #448086
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn-primary {
+    background-color:  #2F4858 !important;
+    border-color:  #2F4858 !important;
+}
+
+.btn-primary-2 {
+    background-color:  #5A427E !important;
+    border-color:  #5A427E !important;
+}
+.btn-info {
+    background-color:  #448086 !important;
+    border-color:  #448086 !important;
+}
+.btn-success {
+    background-color:  #156C00 !important;
+    border-color:  #156C00 !important;
+}
+.btn-warning {
+    background-color:  #9C5500 !important;
+    border-color:  #9C5500 !important;
+}
+.btn-danger {
+    background-color:  #B81414 !important;
+    border-color:  #B81414 !important;
+}
+.btn-white {
+    background-color:  #FFFFFF !important;
+    border-color:  #FFFFFF !important;
+}
+
+.panel-info { border-color: rgba(68,128,134, 0.3); }
+.panel-info > .panel-heading + .panel-collapse > .panel-body { border-color: rgba(68,128,134, 0.3); }
+.panel-info > .panel-heading { background-color: rgba(68,128,134, 0.1); }
+
+.hpanel.hred > .panel-body { border-top: 2px solid #B81414 !important;; }
+.hpanel > .panel-heading { color: #B81414 !important;; }
+
+.btn-outline {
+    background: white !important;
+}
+
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+    background-color: #448086;
+    border-color: #448086;
+}
+.pagination > li > a, .pagination > li > span { color: #448086; }
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus { background: #448086; }
+
+.filters * { font-size: 12px; }
+
+.dd-item, .dd-empty, .dd-placeholder { min-height: 40px; }
+
+/*h-bg-navy-blue {*/
+  /*background: $color-navy-blue;*/
+/*}*/
+/*.h-bg-violet {*/
+  /*background: $color-violet;*/
+/*}*/
+/*.h-bg-blue {*/
+  /*background: $color-blue;*/
+/*}*/
+/*.h-bg-green {*/
+  /*background: $color-green;*/
+/*}*/
+/*.h-bg-yellow {*/
+  /*background: $color-yellow;*/
+/*}*/
+/*.h-bg-orange {*/
+  /*background: $color-orange;*/
+/*}*/
+/*.h-bg-red {*/
+  /*background: $color-red;*/
+/*}*/
+/*.h-bg-red-deep {*/
+  /*background: $color-red-deep;*/
+/*}*/
+
+
+
+
+.header-logo { display: none !important;}

@@ -1,0 +1,51 @@
+<div class="modal fade hmodal-info" id="comment-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default submit-approval" data-dismiss="modal">Submit</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".approval-action").on("click", function () {
+
+        _outer_this = $(this)
+
+        $("#comment-modal .modal-header").text($(this).data("title"));
+        $("#comment-modal .modal-body").html("<textarea id='comment-content' class='form-control empty' rows='10' style='height: 100px'></textarea>");
+
+        $(".submit-approval").off();
+        $(".submit-approval").on("click", function () {
+
+            _inner_this = $(this)
+            comment = $("#comment-content").val();
+
+            $(location).attr('href',
+                '/approvals/approve?ref_id=' + _outer_this.data("ref-id") +
+                '&appr_id=' + _outer_this.data("appr-id") +
+                '&appr_value=' + _outer_this.data("appr-value") +
+                '&comment=' + comment)
+
+        });
+
+    });
+
+    $('#json-data-modal').on('hidden.bs.modal', function (e) {
+        $("#json-modal-body").html()
+    })
+</script>
+
+<style>
+    #json-modal-body textarea.empty {color: transparent;}
+</style>

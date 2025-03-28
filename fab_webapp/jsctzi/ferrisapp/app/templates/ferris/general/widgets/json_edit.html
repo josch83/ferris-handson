@@ -1,0 +1,46 @@
+{% set ran = range(1, 51) | random %}<textarea id="json-editor-{{ ran }}" class="form-control" rows="30" style="height: {{ height }}px" name="{{ field.name }}" placeholder='
+{
+    "example emotion one": "high",
+    "example emotion two": "high",
+    "example emotion three": 4,
+    ....
+}'>{{ value | replace('True', 'true') | replace('False', 'false') }}</textarea>
+
+<style>
+    .CodeMirror {
+        height: {{ height }}px;
+        max-width: 800px;
+    }
+
+</style>
+
+<script>
+    $(document).ready(function () {
+
+        setTimeout(
+            function () {
+                var textarea = document.getElementById("json-editor-{{ ran }}");
+
+                var editor = CodeMirror.fromTextArea(textarea, {
+                    lineNumbers: true,
+                    matchBrackets: true,
+
+                    {% if read_only %}
+                        readOnly: true,
+                        theme: 'readOnly',
+                    {% endif %}
+
+                    styleActiveLine: true,
+                    mode: {"name": "javascript", "json": true},
+                    tabMode: "indent",
+                });
+
+                var totalLines = editor.lineCount() + 10;
+                editor.autoFormatRange({line: 0, ch: 0}, {line: totalLines});
+                editor.setCursor({line: 0, ch: 0})
+            },
+            1000
+        )
+
+    });
+</script>

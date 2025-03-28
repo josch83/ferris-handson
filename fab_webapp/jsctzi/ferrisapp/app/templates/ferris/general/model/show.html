@@ -1,0 +1,62 @@
+{% extends base_template %}
+{% import 'ferris/general/lib.html' as lib %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+
+            {{ lib.panel_begin(title, "show") }}
+
+            {% if related_views is defined %}
+                <ul class="nav nav-tabs" style="{{ "display: none;" if not related_views else "" }}">
+                    <li class="active"><a href="#Home" data-toggle="tab">{{ _("Details") }}</a></li>
+                    {% for view in related_views %}
+                        <li>
+                            <a href="#{{ view.__class__.__name__ }}" data-toggle="tab">{{ view.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="tab-content">
+                {% for view in related_views %}
+                    <div id="{{ view.__class__.__name__ }}" class="tab-pane">
+
+                        {% if widgets.get('related_views')[loop.index - 1].show_search_widget is defined and widgets.get('related_views')[loop.index - 1].show_search_widget != None %}
+                            <br>
+                            {% call lib.accordion_tag("accordion"+loop.index|string,_("Search"), False) %}
+                                {{ widgets.get('related_views')[loop.index - 1].search_widget()|safe }}
+                            {% endcall %}
+                        {% endif %}
+                        {% if list_widget_data is defined %}
+                            {{ widgets.get('related_views')[loop.index - 1](pk = pk, widget_data=list_widget_data)|safe }}
+                        {% else %}
+                            {{ widgets.get('related_views')[loop.index - 1](pk = pk)|safe }}
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% block show_form %}
+                <div id="Home" class="tab-pane active">
+                    {% if show_widget_data is defined %}
+                        {{ widgets.get('show')(widget_data=show_widget_data)|safe }}
+                    {% else %}
+                        {{ widgets.get('show')()|safe }}
+                    {% endif %}
+
+                    {% if dashboard_widget_data is defined %}
+                        {{ widgets.get('dashboard')(widget_data=dashboard_widget_data)|safe }}
+                    {% endif %}
+                </div>
+            {% endblock show_form %}
+
+            {% if related_views is defined %}</div>{% endif %}
+            {{ lib.panel_end() }}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block add_tail_js %}
+{#    <script src="{{ url_for('static',filename='js/ab_keep_tab.js') }}"></script>#}
+{% endblock %}

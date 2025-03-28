@@ -1,0 +1,109 @@
+{% extends 'ferris/init.html' %}
+{% import 'ferris/baselib.html' as baselib %}
+
+{% block head_css %}
+    
+    <link href="{{url_for('appbuilder.static',filename='css/bootstrap-datepicker/bootstrap-datepicker3.min.css')}}" rel="stylesheet">
+      <link href="{{url_for('appbuilder.static',filename='css/select2/select2.min.css')}}" rel="stylesheet">
+      <link href="{{url_for('appbuilder.static',filename='css/select2/select2-bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('appbuilder.static',filename='css/ab.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/fontawesome/css/font-awesome.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/metisMenu/dist/metisMenu.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/animate.css/animate.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/dist/css/bootstrap.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/codemirror/style/codemirror.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/codemirror/style/themes/readOnly.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/codemirror/style/themes/xq-dark.css') }}"/>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/pe-icon-7-stroke/css/helper.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fab_style.css') }}"/>
+
+    {% if appbuilder.app_theme %}
+           <link href="{{url_for('static', filename='css/themes/'+ appbuilder.app_theme )}}"  rel="stylesheet">
+    {% endif %}
+
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='css/jb.css') }}"/>#}
+
+{% endblock %}
+
+{% block head_js %}
+    <script src="{{ url_for('static', filename='vendor/jquery/dist/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/slimScroll/jquery.slimscroll.min.js') }}"></script>
+
+    <script src="{{ url_for('appbuilder.static',filename='js/ab_filters.js') }}"></script>
+    <script src="{{ url_for('appbuilder.static',filename='js/ab_actions.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <style>
+        #side-menu li a, #side-menu li .nav-second-level li a {font-weight: normal;}
+    </style>
+
+    {% block navbar %}
+        {% include 'ferris/nav/topbar.html' %}
+        {% include 'ferris/nav/sidebar.html' %}
+    {% endblock %}
+
+    <div id="wrapper">
+        {% block messages %}
+            {% include 'appbuilder/flash.html' %}
+        {% endblock %}
+
+        {% block page_header %}
+        {% endblock %}
+
+        <div class="content">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+
+    {% include 'ferris/general/confirm.html' %}
+    {% include 'ferris/general/alert.html' %}
+    {% include 'ferris/general/json_modal.html' %}
+    {% include 'ferris/general/shell_modal.html' %}
+    {% include 'ferris/general/comment_modal.html' %}
+    {% include 'ferris/general/generic_modal.html' %}
+    {% include 'ferris/general/ajax_modal.html' %}
+
+{% endblock %}
+
+{% block bora %}
+{% endblock %}
+
+{% block tail_js %}
+    <script src="{{ url_for('static', filename='vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/metisMenu/dist/metisMenu.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/iCheck/icheck.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/peity/jquery.peity.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/sparkline/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/nestable/jquery.nestable.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/codemirror/script/codemirror.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/codemirror/mode/shell.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/codemirror/addon/keyword.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/codemirror/javascript.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/codemirror/script/formatting.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/jquery-flot/jquery.flot.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/jquery-flot/jquery.flot.resize.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/jquery-flot/jquery.flot.pie.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/flot.curvedlines/curvedLines.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/jquery.flot.spline/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/nestable/jquery.nestable.js') }}"></script>
+
+    <script src="{{url_for('appbuilder.static',filename='js/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
+    <script src="{{url_for('appbuilder.static',filename='js/select2/select2.min.js')}}"></script>
+    <script src="{{ url_for('appbuilder.static',filename='js/ab.js') }}"></script>
+
+    <!-- App scripts -->
+    <script src="{{ url_for('static', filename='js/ab_keep_tab.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/homer.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ferris.js') }}"></script>
+
+
+{% endblock %}

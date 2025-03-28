@@ -1,0 +1,40 @@
+{% import 'ferris/general/lib.html' as lib %}
+
+<form id="filter_form{{ extra_id }}" class="form-search" method="get" action="{{ action }}">
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-sm dropdown-toggle btn-info btn-outline text-info" data-toggle="dropdown" style="width: 300px;">
+            {{ _("Add Filter") }}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" style="margin-top: -3px; border-color: #1b6d85; border-top-left-radius: 0; min-width: 300px; border-top-right-radius: 0;">
+            {% for col in include_cols %}
+                <li><a href="javascript:void(0)" name="{{ col }}" class="filter btn btn-sm text-info" onclick="return false;">
+                    {{ label_columns[col] }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <br>
+    <br>
+    <table class="table table-responsive table-striped filters">
+        <tbody>
+
+        </tbody>
+    </table>
+    <br>
+    {{ lib.btn_search() }}
+</form>
+
+<script>
+    (function ($) {
+        var filter = new AdminFilters(
+            '#filter_form{{ extra_id }}',
+            {{ label_columns | tojson }},
+            {{ form_fields | tojson }},
+            {{ search_filters | tojson }},
+            {{ active_filters | tojson }}
+        );
+    })(jQuery);
+
+</script>
