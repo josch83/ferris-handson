@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-jsctzi
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+
+spec:
+  ingressClassName: nginx-external
+  rules:
+  - host: jsctzi.magdemo.ferris.ai
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: jsctzi
+            port:
+              number: 80
+  tls:
+    - hosts:
+      - jsctzi.magdemo.ferris.ai
+      secretName: letsencrypt-manual-magdemo.ferris.ai-tls 

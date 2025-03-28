@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jsctzi
+  name: jsctzi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jsctzi
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: jsctzi
+    spec:
+      imagePullSecrets:
+        - name: harbor-secret
+      containers:
+        
+        
+        - image: hub.ferris.ai/mag/jsctzi:1.0.0
+          imagePullPolicy: "Always"
+          name: jsctzi
+          # using image default entrypoint
+          volumeMounts:
+          - name: creds-volume
+            readOnly: true
+            mountPath: "/etc/creds-volume"
+          
+          command:
+            - "python3"
+          args: ["/app/ferrisapp/run.py"]
+          env:
+            # The APP_NAME is used for fetching Consul config
+            - name: APP_NAME
+              value: ferris.apps.mag_demo_webapp1
+            - name: PYTHONPATH
+              value: /app/
+            
+            # Consul infra coordinates
+            - name: CONSUL_HOST
+              value: fx-consul-server.core
+            - name: CONSUL_PORT
+              value: "8500"
+            
+            #  API coordinates. This api contains the data model and is accessed through REST API.
+            - name: JSCTZI_API_HOST
+              value: http://jsctzi-api
+            - name: JSCTZI_API_PORT
+              value: "80"
+          ports:
+            - containerPort: 8080
+          resources: {}
+      
+      volumes:
+        - name: creds-volume
+          secret:
+            secretName: jsctzi-secret
+      
+      restartPolicy: Always
+status: {}
