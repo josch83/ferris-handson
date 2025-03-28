@@ -1,0 +1,8 @@
+include LICENSE
+include README.md
+include config.py
+recursive-include ./bin *
+prune *.pyc
+recursive-include fab_addon_jsctzi_api/static *
+recursive-include fab_addon_jsctzi_api/templates *
+recursive-include fab_addon_jsctzi_api/translations *

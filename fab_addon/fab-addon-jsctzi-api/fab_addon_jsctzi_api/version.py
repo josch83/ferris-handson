@@ -1,0 +1,10 @@
+VERSION_MAJOR = 1
+VERSION_MINOR = 0
+VERSION_BUILD = 0
+VERSION_INFO = (VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD)
+VERSION_STRING = f"{VERSION_MAJOR}.{VERSION_MINOR}.{VERSION_BUILD}"
+AUTHOR_NAME = "Ferris Solutions AG"
+DESCRIPTION = "Ferris F.A.B. addon that provides model views for external Demo API"
+AUTHOR_EMAIL = "info@ferris.ai"
+
+__version__ = VERSION_INFO

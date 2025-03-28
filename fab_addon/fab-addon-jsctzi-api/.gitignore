@@ -1,0 +1,6 @@
+.DS_Store
+**/.DS_Store
+__pycache__
+**/__pycache__
+.idea
+fab_addon_jsctzi_api.egg-info

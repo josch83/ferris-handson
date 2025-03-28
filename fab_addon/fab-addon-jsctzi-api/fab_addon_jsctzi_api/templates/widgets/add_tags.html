@@ -1,0 +1,248 @@
+{% import 'appbuilder/general/lib.html' as lib %}
+
+{% set begin_sep_label = '<td class="col-lg-2">' %}
+{% set end_sep_label = '</td>' %}
+{% set begin_sep_field = '<td>' %}
+{% set end_sep_field = '</td>' %}
+
+
+{% if form_action is defined %}
+    <form action="{{form_action}}" method="post" enctype="multipart/form-data">
+{% else %}
+    <form id="model_form" action="" method="post" enctype="multipart/form-data">
+{% endif %}
+    {{form.hidden_tag()}}
+
+    {% if fieldsets %}
+        {% for fieldset_item in fieldsets %}
+            {% if fieldset_item[1].get('expanded') == None %}
+                {% set expanded = True %}
+            {% else %}
+                {% set expanded = fieldset_item[1].get('expanded') %}
+            {% endif %}
+            {% call lib.accordion_tag(loop.index,fieldset_item[0], expanded) %}
+            <div class="table-responsive">
+                <table class="table table-responsive table-bordered">
+                    {% for item in fieldset_item[1].get('fields') %}
+                        {% if item not in exclude_cols %}
+                            <tr>
+                                {{ lib.render_field(form[item], begin_sep_label, end_sep_label, begin_sep_field, end_sep_field) }}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+            {% endcall %}
+        {% endfor %}
+    {% else %}
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                {% for col in include_cols %}
+                    {% set field = form[col] %}
+                    {% if field.name not in exclude_cols %}
+                    <tr>
+                        {{ lib.render_field(field, begin_sep_label, end_sep_label, begin_sep_field, end_sep_field) }}
+                    </tr>
+                    
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+
+    {{ lib.render_form_controls() }}
+</form>
+
+<script type="application/javascript">
+
+
+//$('#risk_partner_id').prepend($('<option value="' + '-- select --' + '">' + '-- select --' + '</option>')); 
+
+
+function removeOptions() {
+    var sel = document.getElementById('event_sub_type');
+    //for (i = sel.length - 1; i >= 0; i--) {
+    for (i = sel.length; i >= 0; i--) {
+        sel.remove(i);
+    }
+
+}
+
+function myAppend(value) {
+    value_ = value;
+    label_ = value;
+    if (value.startsWith('Other')) {  // keeps clearer label but sends the allowed value for Other...
+        value_ = "Other";
+        label_ = value;
+        console.log("Checking the option with Other");
+        console.log(value_);
+        console.log(label_);
+    }
+    console.log(value_);
+    console.log(label_);
+    var option_item = '<option value="' + value_ + '">' + label_ + '</option>';
+    console.log(option_item);
+    $('#event_sub_type').append(option_item);
+}
+
+
+const compliance_sub_type = ["Onboarding", "Source of Funds", "TRX Monitoring", "PEP Alert", "Media Alert", "Criminal", "Sanctions", "Other compliance"]
+const risk_sub_type = ["Concentration Risk", "Market Risk", "Operational Risk", "Reputational Risk", "Other risk"]
+const regulatory_sub_type = ["SNB", "FINMA", "Other regulatory"]
+
+
+async function getData() {
+  const response = await fetch("/tag/json_list");
+  var data = await response.json();
+  console.log("Inside async func")
+  console.log(data)
+  return data
+}
+
+
+async function getBRfromPartnerId(pr_id) {
+
+  const url_ = "/risk_event/brs/" + pr_id;
+  const response = await fetch(url_);
+  var data = await response.json();
+  console.log("Inside async BR from partner id func")
+  console.log(data)
+  return data
+}
+
+
+async function getACfromBRId(br_id) {
+
+  const url_ = "/risk_event/acs/" + br_id;
+  const response = await fetch(url_);
+  var data = await response.json();
+  console.log("Inside async accounts contracts from BR id func")
+  console.log(data)
+  return data
+}
+
+
+function appendBRs(value) {
+    var option_item = '<option value="' + value.id + '">' + value.external_reference + '</option>';
+    $('#risk_br_id').append(option_item);
+}
+
+function appendAs(value) {
+    var option_item = '<option value="' + value.id + '">' + value.description + '</option>';
+    $('#risk_account_id').append(option_item);
+}
+
+function appendCs(value) {
+    var option_item = '<option value="' + value.id + '">' + value.asset_code + ' - ' + value.contract_reference + '</option>';
+    $('#risk_contract_id').append(option_item);
+}
+
+
+$(document).ready(function () {
+    $('#event_sub_type').empty();
+    document.querySelectorAll('#risk_br_id option').forEach(option => option.remove());
+    document.querySelectorAll('#risk_account_id option').forEach(option => option.remove());
+    document.querySelectorAll('#risk_contract_id option').forEach(option => option.remove());
+
+
+    getData()
+    .then(function(dada) {
+        console.log("Inside main logic")
+        console.log(dada);
+        console.log(dada.tags);
+        $("#tags").select2({tags: dada.tags, tokenSeparators: [',', " ", ";"], allowClear: true, multiple: true});
+
+    });
+
+
+
+    if ($("#event_type").val() == "Compliance") { 
+        //removeOptions();
+        document.querySelectorAll('#event_sub_type option').forEach(option => option.remove());
+        
+        compliance_sub_type.forEach(myAppend);
+
+        }   else if ($("#event_type").val() == "Risk") {
+            //removeOptions();
+            document.querySelectorAll('#event_sub_type option').forEach(option => option.remove());
+            risk_sub_type.forEach(myAppend);
+
+        }   else if ($("#event_type").val() == "Regulatory") {
+            //removeOptions();
+            document.querySelectorAll('#event_sub_type option').forEach(option => option.remove());
+            regulatory_sub_type.forEach(myAppend);
+
+}
+
+    $("#event_type").change(function () { 
+        var val = $(this).val();
+        if (val == "Compliance") {
+        // have to hide: 
+        //removeOptions();
+        document.querySelectorAll('#event_sub_type option').forEach(option => option.remove());
+        compliance_sub_type.forEach(myAppend);
+        
+
+        } else if (val == "Risk") {
+            //removeOptions();
+            document.querySelectorAll('#event_sub_type option').forEach(option => option.remove());
+            risk_sub_type.forEach(myAppend);
+
+        }
+
+        else if (val == "Regulatory") {
+            //removeOptions();
+            document.querySelectorAll('#event_sub_type option').forEach(option => option.remove());
+            regulatory_sub_type.forEach(myAppend);
+
+        }
+        });
+
+
+        $("#risk_partner_id").change(function () { 
+            var val = $(this).val();
+            console.log("Partner id selected");
+            console.log(typeof(val));
+            console.log(val)
+            document.querySelectorAll('#risk_br_id option').forEach(option => option.remove());
+            document.querySelectorAll('#risk_account_id option').forEach(option => option.remove());
+            document.querySelectorAll('#risk_contract_id option').forEach(option => option.remove());
+            var option_item = '<option value="1000000000333333">' + '-- select --' + '</option>';
+            $('#risk_br_id').append(option_item);
+            getBRfromPartnerId(val)
+            .then(function(dada) {
+                console.log(dada);
+                dada.br.forEach(appendBRs);
+
+            });
+        
+        
+        });
+
+        
+        $("#risk_br_id").change(function () { 
+            var val = $(this).val();
+            document.querySelectorAll('#risk_account_id option').forEach(option => option.remove());
+            document.querySelectorAll('#risk_contract_id option').forEach(option => option.remove());
+            
+            var option_item_a = '<option value="' + "1000000000333333" + '"">' + '-- select --' + '</option>';
+            $('#risk_account_id').append(option_item_a);
+            var option_item_c = '<option value="' + "1000000000333333" + '"">' + '-- select --' + '</option>';
+            $('#risk_contract_id').append(option_item_c);
+            getACfromBRId(val)
+            .then(function(dada) {
+                console.log(dada);
+                dada.accounts.forEach(appendAs);
+                dada.contracts.forEach(appendCs);
+
+            });
+        
+        
+        });
+
+
+
+    });
+
+
+</script>

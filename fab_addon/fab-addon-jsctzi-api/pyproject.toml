@@ -1,0 +1,9 @@
+[tool.model_view_generator]
+generator_version = "0.1.0"
+template_version = "0.5.22"
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
