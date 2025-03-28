@@ -1,0 +1,36 @@
+[app_config]
+
+## config to create the new package repo
+project_description = "Ferris F.A.B. addon that provides model views for external Demo API"
+author_name = "Ferris Solutions AG"
+author_email = "info@ferris.ai"
+
+
+[custom_renders_functions_code]  # python functions that define custom renders to be used in some views
+
+
+[addon_manager.register_views]
+no_menu = []
+
+[addon_manager.register_views.user_account]
+
+[addon_manager.register_views.address]
+
+[entities.views]
+exclude = ["(example)"] # Excludes the generation of the respective file, no matter what's configured afterwards
+[entities.views.user_account]
+related_views = ["address"]
+
+[entities.models]
+exclude = ["(example)"] # Excludes the generation of the respective file, no matter what's configured afterwards
+
+
+[entities.services]
+exclude = ["(example)"] # Excludes the generation of the respective file, no matter what's configured afterwards
+
+
+[widgets]
+exclude = ["(example)basic_account"]
+
+[enums]
+exclude = ["(example)person.marital_status"]

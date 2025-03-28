@@ -1,0 +1,5 @@
+[app_config]
+
+[app_config.consul]
+host = "fx-consul-server.core"
+port = 8500

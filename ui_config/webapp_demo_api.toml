@@ -1,0 +1,24 @@
+[app_config]
+
+# Project config values
+project_description = "Ferris F.A.B. web app that provides the UI to interact with the demo API"
+author_name = "Ferris Solutions AG"
+author_email = "info@ferris.ai"
+consul_config_values_env = "prod"
+
+# Public web address
+
+# Minio config values
+use_minio = "false" # Required, default "false"
+
+# Authentication config values
+auth_type = "AUTH_OAUTH" # See: https://flask-appbuilder.readthedocs.io/en/latest/security.html#authentication-methods
+auth_user_registration = "true"
+auth_user_registration_role = "admin"
+auth_roles_sync_at_login = "true"
+
+public_web_application = false
+api_data_model_security = "True" # In production or cloud API we might run with token. In those cases this should be set to "True"
+
+# Packages needed by the Web App. Only local paths, for now.
+dist_directory = "ferrisapp/provisioning/dist"
