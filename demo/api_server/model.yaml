@@ -188,7 +188,7 @@ info:
     url: http://ferris.ai/
   description: API definition for ferris.ai Ferris Demo Project for MAG Hands On
   title: ferris.ai Ferris Demo Project for MAG Hands On
-  version: 0.0.1
+  version: 0.0.2
 openapi: 3.0.1
 paths:
   /address:

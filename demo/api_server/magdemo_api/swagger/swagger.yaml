@@ -6,7 +6,7 @@ info:
     name: Ferris Solutions AG
     url: http://ferris.ai/
     email: info@ferris.ai
-  version: 0.0.1
+  version: 0.0.2
 servers:
 - url: /
 security:
