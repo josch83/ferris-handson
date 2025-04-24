@@ -11,7 +11,7 @@ docker network create ferris-dev
 
 2. Build the Docker image of the web app
 ```console
-docker build -f Dockerfile -t magdemo:0.0.1 .
+docker build -f Dockerfile -t magdemo:0.0.2 .
 ```
 
 3. Run all the services (Web App, Postgres, Kafka/Zookeeper, Consul, etc.)

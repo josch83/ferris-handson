@@ -1,6 +1,6 @@
 services:
   web-app:
-    image: magdemo:0.0.1
+    image: magdemo:0.0.2
     container_name: web-app
     environment:
       CONSUL_HOST: consul
