@@ -1,0 +1,1309 @@
+components:
+  schemas:
+    address:
+      properties:
+        changed_by:
+          description: User name/email of the user who last changed the record via
+            API
+          readOnly: true
+          title: changed_by
+          type: string
+        changed_on:
+          description: Timestamp on which the record was last changed, automatically
+            filled by the API
+          format: date-time
+          readOnly: true
+          title: changed_on
+          type: string
+        created_by:
+          description: User name/email of the user who inserted the record via API
+          readOnly: true
+          title: created_by
+          type: string
+        created_on:
+          description: Timestamp on which the record was created, automatically filled
+            by the API
+          format: date-time
+          readOnly: true
+          title: created_on
+          type: string
+        email_address:
+          description: to be documented
+          title: email_address
+          type: string
+        id:
+          description: to be documented
+          readOnly: true
+          title: id
+          type: integer
+        user_id:
+          description: to be documented
+          title: user_id
+          type: integer
+      required:
+      - email_address
+      - user_id
+      type: object
+    role_rights:
+      properties:
+        can_access:
+          description: to be documented
+          nullable: true
+          title: can_access
+          type: boolean
+          x-nullable: true
+        can_create:
+          description: to be documented
+          nullable: true
+          title: can_create
+          type: boolean
+          x-nullable: true
+        can_delete:
+          description: to be documented
+          nullable: true
+          title: can_delete
+          type: boolean
+          x-nullable: true
+        can_read:
+          description: to be documented
+          nullable: true
+          title: can_read
+          type: boolean
+          x-nullable: true
+        can_update:
+          description: to be documented
+          nullable: true
+          title: can_update
+          type: boolean
+          x-nullable: true
+        changed_by:
+          description: User name/email of the user who last changed the record via
+            API
+          readOnly: true
+          title: changed_by
+          type: string
+        changed_on:
+          description: Timestamp on which the record was last changed, automatically
+            filled by the API
+          format: date-time
+          readOnly: true
+          title: changed_on
+          type: string
+        created_by:
+          description: User name/email of the user who inserted the record via API
+          readOnly: true
+          title: created_by
+          type: string
+        created_on:
+          description: Timestamp on which the record was created, automatically filled
+            by the API
+          format: date-time
+          readOnly: true
+          title: created_on
+          type: string
+        entity:
+          description: to be documented
+          enum:
+          - address
+          - role_rights
+          - user_account
+          nullable: true
+          title: entity
+          type: string
+          x-nullable: true
+        id:
+          description: Auto increment ID of the Entity
+          readOnly: true
+          title: id
+          type: integer
+        role:
+          description: to be documented
+          enum:
+          - admin
+          - user
+          nullable: true
+          title: role
+          type: string
+          x-nullable: true
+      type: object
+    user_account:
+      properties:
+        addresses:
+          items:
+            description: address
+            type: integer
+          type: array
+        changed_by:
+          description: User name/email of the user who last changed the record via
+            API
+          readOnly: true
+          title: changed_by
+          type: string
+        changed_on:
+          description: Timestamp on which the record was last changed, automatically
+            filled by the API
+          format: date-time
+          readOnly: true
+          title: changed_on
+          type: string
+        created_by:
+          description: User name/email of the user who inserted the record via API
+          readOnly: true
+          title: created_by
+          type: string
+        created_on:
+          description: Timestamp on which the record was created, automatically filled
+            by the API
+          format: date-time
+          readOnly: true
+          title: created_on
+          type: string
+        fullname:
+          description: to be documented
+          nullable: true
+          title: fullname
+          type: string
+          x-nullable: true
+        id:
+          description: to be documented
+          readOnly: true
+          title: id
+          type: integer
+        name:
+          description: to be documented
+          nullable: true
+          title: name
+          type: string
+          x-nullable: true
+      type: object
+  securitySchemes:
+    sso_auth:
+      in: header
+      name: Authorization
+      type: apiKey
+info:
+  contact:
+    email: info@ferris.ai
+    name: Ferris Solutions AG
+    url: http://ferris.ai/
+  description: API definition for ferris.ai Ferris Demo Project for MAG Hands On
+  title: ferris.ai Ferris Demo Project for MAG Hands On
+  version: 0.0.1
+openapi: 3.0.1
+paths:
+  /address:
+    get:
+      description: Get all address IDs and names
+      operationId: get_addresss
+      parameters:
+      - description: Offset for start of  returned records
+        in: query
+        name: OFFSET
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+      - description: Limit the amount of returned records
+        in: query
+        name: LIMIT
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+      - description: Column used for sorting. The format is [+|-]<column_name>
+        in: query
+        name: ORDER_BY
+        required: false
+        schema:
+          type: string
+      - description: 'Specifies the fields to be returned. Default: Empty List, in
+          which case __repr__ is returned as name>'
+        in: query
+        name: LIST_FIELDS
+        required: false
+        schema:
+          items:
+            enum:
+            - changed_by
+            - changed_on
+            - created_by
+            - created_on
+            - email_address
+            - id
+            - user_id
+            type: string
+          type: array
+      - description: Search for addresss, where changed_by like input (place the %-wildcard
+          at start and/or end of the input yourself)
+        in: query
+        name: changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where changed_by notlike input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: not_changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where changed_by ilike input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: ilike_changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where changed_by notilike input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: notilike_changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where changed_on >= input
+        in: query
+        name: gte_changed_on
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where changed_on <= input
+        in: query
+        name: lte_changed_on
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where created_by like input (place the %-wildcard
+          at start and/or end of the input yourself)
+        in: query
+        name: created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where created_by notlike input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: not_created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where created_by ilike input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: ilike_created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where created_by notilike input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: notilike_created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where created_on >= input
+        in: query
+        name: gte_created_on
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where created_on <= input
+        in: query
+        name: lte_created_on
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where email_address like input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: email_address
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where email_address notlike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: not_email_address
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where email_address ilike input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: ilike_email_address
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where email_address notilike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: notilike_email_address
+        required: false
+        schema:
+          type: string
+      - description: Search for addresss, where id == input
+        in: query
+        name: equal_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for addresss, where id != input
+        in: query
+        name: not_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for addresss, where id in input
+        in: query
+        name: in_list_id
+        required: false
+        schema:
+          items:
+            type: integer
+          type: array
+      - description: Search for addresss, where id >= input
+        in: query
+        name: gte_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for addresss, where id <= input
+        in: query
+        name: lte_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for addresss, where user_id == input
+        in: query
+        name: equal_user_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for addresss, where user_id != input
+        in: query
+        name: not_user_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for addresss, where user_id in input
+        in: query
+        name: in_list_user_id
+        required: false
+        schema:
+          items:
+            type: integer
+          type: array
+      - description: Search for addresss, where user_id >= input
+        in: query
+        name: gte_user_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for addresss, where user_id <= input
+        in: query
+        name: lte_user_id
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  description: Structure returned when invoking GET all 200
+                  title: all_objects
+                  type: object
+                type: array
+          description: Successful operation
+        '400':
+          description: The specified address ID is invalid, e.g. failed some consistency
+            checks.
+        '404':
+          description: An address with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Get all address IDs
+      tags:
+      - address
+    post:
+      description: Create a new address with new id and provided data
+      operationId: create_address
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/address'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                description: Structure returned when creating (POST) a new address
+                properties:
+                  oid:
+                    description: address ID
+                    type: integer
+                title: New address
+                type: object
+          description: address created
+        '400':
+          description: The specified address ID is invalid, e.g. failed some consistency
+            checks.
+        '404':
+          description: An address with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Create a new address
+      tags:
+      - address
+  /address/{oid}:
+    get:
+      description: Get a address by ID
+      operationId: get_address_by_id
+      parameters:
+      - description: address ID
+        in: path
+        name: oid
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/address'
+          description: Successful operation
+        '400':
+          description: The specified address ID is invalid, e.g. failed some consistency
+            checks.
+        '404':
+          description: An address with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Get a address by ID
+      tags:
+      - address
+    put:
+      description: Update the address with the provided data
+      operationId: update_address_by_id
+      parameters:
+      - description: address ID
+        in: path
+        name: oid
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/address'
+        required: true
+      responses:
+        '201':
+          description: address updated
+        '400':
+          description: The specified address ID is invalid, e.g. failed some consistency
+            checks.
+        '404':
+          description: An address with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Update the address
+      tags:
+      - address
+  /role_rights:
+    get:
+      description: Get all role_rights IDs and names
+      operationId: get_role_rightss
+      parameters:
+      - description: Offset for start of  returned records
+        in: query
+        name: OFFSET
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+      - description: Limit the amount of returned records
+        in: query
+        name: LIMIT
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+      - description: Column used for sorting. The format is [+|-]<column_name>
+        in: query
+        name: ORDER_BY
+        required: false
+        schema:
+          type: string
+      - description: 'Specifies the fields to be returned. Default: Empty List, in
+          which case __repr__ is returned as name>'
+        in: query
+        name: LIST_FIELDS
+        required: false
+        schema:
+          items:
+            enum:
+            - can_access
+            - can_create
+            - can_delete
+            - can_read
+            - can_update
+            - changed_by
+            - changed_on
+            - created_by
+            - created_on
+            - entity
+            - id
+            - role
+            type: string
+          type: array
+      - description: Search for role_rightss, where can_access == input
+        in: query
+        name: equal_can_access
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_access != input
+        in: query
+        name: not_can_access
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_access isNull input
+        in: query
+        name: isnull_can_access
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_create == input
+        in: query
+        name: equal_can_create
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_create != input
+        in: query
+        name: not_can_create
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_create isNull input
+        in: query
+        name: isnull_can_create
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_delete == input
+        in: query
+        name: equal_can_delete
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_delete != input
+        in: query
+        name: not_can_delete
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_delete isNull input
+        in: query
+        name: isnull_can_delete
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_read == input
+        in: query
+        name: equal_can_read
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_read != input
+        in: query
+        name: not_can_read
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_read isNull input
+        in: query
+        name: isnull_can_read
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_update == input
+        in: query
+        name: equal_can_update
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_update != input
+        in: query
+        name: not_can_update
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where can_update isNull input
+        in: query
+        name: isnull_can_update
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where changed_by like input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where changed_by notlike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: not_changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where changed_by ilike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: ilike_changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where changed_by notilike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: notilike_changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where changed_on >= input
+        in: query
+        name: gte_changed_on
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where changed_on <= input
+        in: query
+        name: lte_changed_on
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where created_by like input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where created_by notlike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: not_created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where created_by ilike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: ilike_created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where created_by notilike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: notilike_created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where created_on >= input
+        in: query
+        name: gte_created_on
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where created_on <= input
+        in: query
+        name: lte_created_on
+        required: false
+        schema:
+          type: string
+      - description: Search for role_rightss, where entity == input
+        in: query
+        name: equal_entity
+        required: false
+        schema:
+          enum:
+          - address
+          - role_rights
+          - user_account
+          type: string
+      - description: Search for role_rightss, where entity != input
+        in: query
+        name: not_entity
+        required: false
+        schema:
+          enum:
+          - address
+          - role_rights
+          - user_account
+          type: string
+      - description: Search for role_rightss, where entity in input
+        in: query
+        name: in_list_entity
+        required: false
+        schema:
+          items:
+            enum:
+            - address
+            - role_rights
+            - user_account
+            type: string
+          type: array
+      - description: Search for role_rightss, where entity isNull input
+        in: query
+        name: isnull_entity
+        required: false
+        schema:
+          type: boolean
+      - description: Search for role_rightss, where id == input
+        in: query
+        name: equal_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for role_rightss, where id != input
+        in: query
+        name: not_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for role_rightss, where id in input
+        in: query
+        name: in_list_id
+        required: false
+        schema:
+          items:
+            type: integer
+          type: array
+      - description: Search for role_rightss, where id >= input
+        in: query
+        name: gte_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for role_rightss, where id <= input
+        in: query
+        name: lte_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for role_rightss, where role == input
+        in: query
+        name: equal_role
+        required: false
+        schema:
+          enum:
+          - admin
+          - user
+          type: string
+      - description: Search for role_rightss, where role != input
+        in: query
+        name: not_role
+        required: false
+        schema:
+          enum:
+          - admin
+          - user
+          type: string
+      - description: Search for role_rightss, where role in input
+        in: query
+        name: in_list_role
+        required: false
+        schema:
+          items:
+            enum:
+            - admin
+            - user
+            type: string
+          type: array
+      - description: Search for role_rightss, where role isNull input
+        in: query
+        name: isnull_role
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  description: Structure returned when invoking GET all 200
+                  title: all_objects
+                  type: object
+                type: array
+          description: Successful operation
+        '400':
+          description: The specified role_rights ID is invalid, e.g. failed some consistency
+            checks.
+        '404':
+          description: An role_rights with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Get all role_rights IDs
+      tags:
+      - role_rights
+    post:
+      description: Create a new role_rights with new id and provided data
+      operationId: create_role_rights
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/role_rights'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                description: Structure returned when creating (POST) a new role_rights
+                properties:
+                  oid:
+                    description: role_rights ID
+                    type: integer
+                title: New role_rights
+                type: object
+          description: role_rights created
+        '400':
+          description: The specified role_rights ID is invalid, e.g. failed some consistency
+            checks.
+        '404':
+          description: An role_rights with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Create a new role_rights
+      tags:
+      - role_rights
+  /role_rights/{oid}:
+    get:
+      description: Get a role_rights by ID
+      operationId: get_role_rights_by_id
+      parameters:
+      - description: role_rights ID
+        in: path
+        name: oid
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/role_rights'
+          description: Successful operation
+        '400':
+          description: The specified role_rights ID is invalid, e.g. failed some consistency
+            checks.
+        '404':
+          description: An role_rights with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Get a role_rights by ID
+      tags:
+      - role_rights
+    put:
+      description: Update the role_rights with the provided data
+      operationId: update_role_rights_by_id
+      parameters:
+      - description: role_rights ID
+        in: path
+        name: oid
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/role_rights'
+        required: true
+      responses:
+        '201':
+          description: role_rights updated
+        '400':
+          description: The specified role_rights ID is invalid, e.g. failed some consistency
+            checks.
+        '404':
+          description: An role_rights with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Update the role_rights
+      tags:
+      - role_rights
+  /user_account:
+    get:
+      description: Get all user_account IDs and names
+      operationId: get_user_accounts
+      parameters:
+      - description: Offset for start of  returned records
+        in: query
+        name: OFFSET
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+      - description: Limit the amount of returned records
+        in: query
+        name: LIMIT
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+      - description: Column used for sorting. The format is [+|-]<column_name>
+        in: query
+        name: ORDER_BY
+        required: false
+        schema:
+          type: string
+      - description: 'Specifies the fields to be returned. Default: Empty List, in
+          which case __repr__ is returned as name>'
+        in: query
+        name: LIST_FIELDS
+        required: false
+        schema:
+          items:
+            enum:
+            - changed_by
+            - changed_on
+            - created_by
+            - created_on
+            - fullname
+            - id
+            - name
+            - addresses
+            type: string
+          type: array
+      - description: Search for user_accounts, where changed_by like input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where changed_by notlike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: not_changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where changed_by ilike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: ilike_changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where changed_by notilike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: notilike_changed_by
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where changed_on >= input
+        in: query
+        name: gte_changed_on
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where changed_on <= input
+        in: query
+        name: lte_changed_on
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where created_by like input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where created_by notlike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: not_created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where created_by ilike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: ilike_created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where created_by notilike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: notilike_created_by
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where created_on >= input
+        in: query
+        name: gte_created_on
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where created_on <= input
+        in: query
+        name: lte_created_on
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where fullname like input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: fullname
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where fullname notlike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: not_fullname
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where fullname ilike input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: ilike_fullname
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where fullname notilike input (place
+          the %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: notilike_fullname
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where fullname isNull input
+        in: query
+        name: isnull_fullname
+        required: false
+        schema:
+          type: boolean
+      - description: Search for user_accounts, where id == input
+        in: query
+        name: equal_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for user_accounts, where id != input
+        in: query
+        name: not_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for user_accounts, where id in input
+        in: query
+        name: in_list_id
+        required: false
+        schema:
+          items:
+            type: integer
+          type: array
+      - description: Search for user_accounts, where id >= input
+        in: query
+        name: gte_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for user_accounts, where id <= input
+        in: query
+        name: lte_id
+        required: false
+        schema:
+          type: integer
+      - description: Search for user_accounts, where name like input (place the %-wildcard
+          at start and/or end of the input yourself)
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where name notlike input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: not_name
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where name ilike input (place the %-wildcard
+          at start and/or end of the input yourself)
+        in: query
+        name: ilike_name
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where name notilike input (place the
+          %-wildcard at start and/or end of the input yourself)
+        in: query
+        name: notilike_name
+        required: false
+        schema:
+          type: string
+      - description: Search for user_accounts, where name isNull input
+        in: query
+        name: isnull_name
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  description: Structure returned when invoking GET all 200
+                  title: all_objects
+                  type: object
+                type: array
+          description: Successful operation
+        '400':
+          description: The specified user_account ID is invalid, e.g. failed some
+            consistency checks.
+        '404':
+          description: An user_account with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Get all user_account IDs
+      tags:
+      - user_account
+    post:
+      description: Create a new user_account with new id and provided data
+      operationId: create_user_account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_account'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                description: Structure returned when creating (POST) a new user_account
+                properties:
+                  oid:
+                    description: user_account ID
+                    type: integer
+                title: New user_account
+                type: object
+          description: user_account created
+        '400':
+          description: The specified user_account ID is invalid, e.g. failed some
+            consistency checks.
+        '404':
+          description: An user_account with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Create a new user_account
+      tags:
+      - user_account
+  /user_account/{oid}:
+    get:
+      description: Get a user_account by ID
+      operationId: get_user_account_by_id
+      parameters:
+      - description: user_account ID
+        in: path
+        name: oid
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_account'
+          description: Successful operation
+        '400':
+          description: The specified user_account ID is invalid, e.g. failed some
+            consistency checks.
+        '404':
+          description: An user_account with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Get a user_account by ID
+      tags:
+      - user_account
+    put:
+      description: Update the user_account with the provided data
+      operationId: update_user_account_by_id
+      parameters:
+      - description: user_account ID
+        in: path
+        name: oid
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_account'
+        required: true
+      responses:
+        '201':
+          description: user_account updated
+        '400':
+          description: The specified user_account ID is invalid, e.g. failed some
+            consistency checks.
+        '404':
+          description: An user_account with the specified ID was not found.
+        '500':
+          description: An Exception occurred while executing the request
+        default:
+          description: Unexpected error
+      summary: Update the user_account
+      tags:
+      - user_account
+security:
+- sso_auth: []
+servers: []
