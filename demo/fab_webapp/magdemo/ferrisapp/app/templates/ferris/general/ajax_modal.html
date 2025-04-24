@@ -1,0 +1,32 @@
+<div class="modal fade hmodal-info" id="ajax-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <h3 style="float: left"></h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default submit-approval" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#ajax-modal").on("show.bs.modal", function (e) {
+        var _this = $(e.relatedTarget);
+        $("#ajax-modal .modal-header > h3").text(_this.data('modaltitle'))
+
+        $.get(
+            _this.attr("data-ref"),
+            function(data) {
+                $("#ajax-modal .modal-body").html(data)
+            }
+        )
+    });
+</script>

@@ -1,0 +1,57 @@
+{
+  "_environment": "To run the web app locally aka Development Mode",
+  "APP_TITLE": "magdemo",
+  "DEFAULT_TOPIC": "ferris.events",
+  "ADDON_MANAGERS": [
+    "fab_addon_magdemo_api.manager.MAGDEMOManager"],
+  "CSRF_ENABLED": true,
+  "DB_HOST": "app-usecase-postgres-postgresql.app",
+  "DB_PORT": 5432,
+  "DB_USERNAME": "mag_demo_inst",
+  "DB_NAME": "mag_demo_inst2_db",
+  "LOGS_INDEX": "ferris-logs*",
+  "EVENTS_INDEX": "*events*",
+  "APP_THEME": "ferris",
+  "API_DATA_MODEL_SECURITY": "True",
+  "WEBAPP_ADDRESS": "https://magdemo.magdemo.ferris.ai",
+  "CONSUL_EXCLUDE_NAMESPACES": ["ferris.executor.packages", "ferris.workflows"],
+  "BABEL_DEFAULT_LOCALE": "en",
+  "BABEL_TRANSLATION_DIRECTORIES": "translations",
+  "LANGUAGES": {
+    "en": {"flag": "gb", "name": "English"}
+    },
+  "KAFKA_PROTOCOL": "SSL",
+  "AUTH_TYPE": 4,
+  "AUTH_ROLE_ADMIN": "admin",
+  "AUTH_ROLE_PUBLIC": "Public",
+  "AUTH_USER_REGISTRATION": true,
+  "AUTH_USER_REGISTRATION_ROLE": "admin",
+  "AUTH_ROLES_SYNC_AT_LOGIN": true,
+  "FAB_SECURITY_MANAGER_CLASS": "ferris_fab_oauth.security.KeycloakRoleBasedSecurityManager",
+  "AUTH_ROLES_MAPPING": {
+    "admin": ["admin"] , 
+  
+    "user": ["user"] 
+  
+  },
+  "FAB_ROLES": {
+    "admin": [
+      [".*", "can_list"],
+      [".*", "can_requested_list"],
+      [".*", "can_show"],
+      [".*", "menu_access"],
+      [".*", "can_get"],
+      [".*", "can_info"],
+      [".*", "can_delete"],
+      [".*", "can_add"],
+      [".*", "can_index"],
+      [".*", "can_edit"],
+      [".*", "can_this_form_get"],
+      [".*", "can_this_form_post"],
+      [".*", "can_action_post"],
+      [".*", "can_action_get"],
+      [".*", "can_action"],
+      [".*", "can_wrapper"]
+    ]
+    }
+  }

@@ -1,0 +1,21 @@
+{% extends base_template %}
+{% import 'ferris/general/lib.html' as lib %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            {{ lib.panel_begin(title) }}
+
+            {% block add_form %}
+                {% if add_form_widget_data is defined %}
+                    {{ widgets.get('add')(form_action=form_action, widget_data=add_form_widget_data)|safe }}
+                {% else %}
+                    {{ widgets.get('add')(form_action=form_action)|safe }}
+                {% endif %}
+            {% endblock %}
+
+            {{ lib.panel_end() }}
+        </div>
+    </div>
+
+{% endblock %}

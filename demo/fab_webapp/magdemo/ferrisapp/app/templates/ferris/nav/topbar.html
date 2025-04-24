@@ -1,0 +1,62 @@
+{% set menu = appbuilder.menu %}
+{% set languages = appbuilder.languages %}
+
+
+<div id="header">
+{#    <div class="color-line"></div>#}
+
+    <div id="logo" class="light-version">
+        <span>
+            <a href="/">{{ appbuilder.app_name }}</a>
+        </span>
+    </div>
+
+    <nav role="navigation">
+        <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
+
+        <div class="small-logo">
+            <span class="text-primary">{{ appbuilder.app_name }}</span>
+        </div>
+
+        <div class="mobile-menu">
+            <button type="button" class="navbar-toggle mobile-menu-toggle" data-toggle="collapse" data-target="#mobile-collapse">
+                <i class="fa fa-chevron-down"></i>
+            </button>
+            <div class="collapse mobile-navbar" id="mobile-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        {% if current_user.is_authenticated %}
+            <div class="navbar-right">
+                <ul class="nav navbar-nav no-borders">
+                    <li class="dropdown userinfo">
+                        <i class="pe-7s-user"></i>
+                        <span>{{ current_user.username }}</span>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/logout" title="Logout">
+                            <i class="pe-7s-upload pe-rotate-90"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {% else %}
+            <div class="navbar-right">
+                <ul class="nav navbar-nav no-borders">
+                    <li class="dropdown">
+                        <a href="/login" style="font-size: 15px;">
+                            Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+
+    </nav>
+
+</div>

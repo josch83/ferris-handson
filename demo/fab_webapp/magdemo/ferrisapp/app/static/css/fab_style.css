@@ -1,0 +1,56 @@
+.btn {
+    text-decoration: none !important;
+    margin-bottom: 5px;
+}
+
+.dd-item, .dd-empty, .dd-placeholder {
+    min-height: 44px;
+}
+
+.navbar-nav .userinfo {
+    font-size: 15px;
+    line-height: 20px;
+    margin-right: 20px;
+}
+
+.navbar-nav .userinfo span, .navbar-nav .userinfo i {
+    display: block;
+    float: left;
+}
+
+.navbar-nav .userinfo span {
+    padding: 15px 5px;
+}
+
+.navbar-nav .userinfo i {
+    padding: 15px 5px;
+    font-size: 25px;
+}
+
+.form-group ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+.btn-neutral {
+    background-color:  #777;
+    border-color:  #777;
+}
+
+.btn-neutral:hover {
+    background-color:  #2F4858;
+    border-color:  #2F4858;
+}
+
+.btn-neutral.btn-outline {
+    color: #777
+}
+
+.btn-neutral.btn-outline:hover {
+    color:  #2F4858;
+}
+
+.modal-title {
+    font-size: 20px
+}

@@ -1,0 +1,56 @@
+{% extends base_template %}
+
+{% block content %}
+
+    <div class="login-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center m-b-md">
+                    <h3>LOGIN</h3>
+                </div>
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <form action="" id="loginForm" method="post" name="login" >
+                            {{ form.hidden_tag() }}
+
+                            <div class="form-group {% if form.errors.openid is defined %} error{% endif %}">
+                                <label class="control-label" for="username">{{ _("Username") }}</label>
+                                <input type="text" placeholder="example@gmail.com" title="Please enter you username" required="" value="" name="username" id="username" class="form-control" autofocus/>
+
+                                {% for error in form.errors.get('openid', []) %}
+                                    <span class="help-block small">[{{ error }}]</span>
+                                {% endfor %}
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="password">{{ _("Password") }}</label>
+                                <input type="password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control"/>
+
+                                {% for error in form.errors.get('openid', []) %}
+                                    <span class="help-block small">[{{ error }}]</span>
+                                {% endfor %}
+
+                            </div>
+
+                            <input type="submit" class="btn btn-info btn-block" value="{{ _('Sign In') }}"/>
+
+                            {% if appbuilder.sm.auth_user_registration %}
+                                <a href="{{ appbuilder.sm.get_url_for_registeruser }}" class="btn btn-default btn-block" >
+                                    {{ _('Register') }}
+                                </a>
+                            {% endif %}
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                2021 Copyright Ferris Labs
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,143 @@
+<div class="modal fade hmodal-info" id="shell-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" id="log-modal-header"></h3>
+                <small class="font-bold modal-description"></small>
+            </div>
+
+            <div class="modal-body">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".show-shell-data").on("click", function () {
+
+        var json_data = $(this).data("json");
+
+        if (json_data == undefined) {
+            json_data = $(this).siblings('.data-holder').text();
+        } else {
+            json_data = JSON.stringify(json_data);
+        }
+
+        $("#shell-modal .modal-title").text($(this).data("title"));
+        $("#shell-modal .modal-description").text($(this).data("description"));
+
+        setTimeout(function() {
+            var parsed_json = JSON.parse(json_data);
+            var result = get_result_text('result', parsed_json);
+            var error = get_result_text('error', parsed_json);
+
+            $("#shell-modal .modal-body").html("<textarea id='shell-modal-content' class='empty'></textarea><br />");
+
+            var response = "" +
+                "-".repeat(97) + "\n" +
+                "Package Name: " + (parsed_json.package_name || "") + "\n" +
+                "Script Name: " + (parsed_json.script_name || "") + "\n" +
+                "Trigger Type: " + (parsed_json.trigger_type || "") + "\n" +
+                "Status: " + parsed_json.status + "\n" +
+                (parsed_json.total_time ? ("Total Execution Time: " + parsed_json.total_time + "\n") : "") +
+                "-".repeat(97) + "\n\n" +
+                (($.isEmptyObject(result) || result === "") ? error : result) + "\n";
+
+            {#$("#shell-modal-content").html(response);#}
+
+            var textarea = document.getElementById("shell-modal-content");
+            $("#shell-modal-content").html(response);
+
+            CodeMirror.fromTextArea(textarea, {
+                lineNumbers: true,
+                matchBrackets: true,
+                styleActiveLine: true,
+                readOnly: true,
+                theme: "xq-dark",
+                mode: "shell",
+                tabMode: "default",
+                keyword: {
+                    "completed": "style-completed",
+                    "unprocessed": "style-unprocessed",
+                    "skipped": "style-skipped",
+                    "failed": "style-failed",
+                    "-{97}": "",
+                    "[\\s\\S]": "style-unformated"
+                },
+                height: 600
+            });
+
+            $("#json-modal-body textarea").removeClass("empty");
+        }, 500);
+
+        function get_result_text(result_type, parsed_json) {
+            var data = parsed_json[result_type];
+            var response = "";
+
+            // return "" if there's no key with a result type name
+            if (!data) return response;
+
+            if (typeof parsed_json !== "undefined") {
+                if (result_type === "error") {
+                    if (typeof data === "object" && !$.isEmptyObject(data)) {
+                        $.each(Object.keys(data), function(i, key) {
+                            if (key.includes("query")) {
+                                response += data[key].message || "";
+                            } else {
+                                response += parsed_json[result_type].message || "";
+                            }
+                        })
+                    } else {
+                        response += parsed_json[result_type].message || "";
+                    }
+                } else {
+                    if (typeof data === "object") {
+                        if (!$.isEmptyObject(data)) response += Object.values(parsed_json[result_type]).join("\n");
+                    } else {
+                        response += parsed_json[result_type];
+                    }
+                }
+                return response;
+            }
+        }
+
+        function code_mirror_init(element_id, options) {
+            var textarea = document.getElementById(element_id);
+
+            var editor = CodeMirror.fromTextArea(textarea, {
+                lineNumbers: true,
+                matchBrackets: true,
+                readOnly: true,
+                theme: options.theme,
+                styleActiveLine: true,
+                mode: options.mode,
+                tabMode: options.tabMode,
+                height: options.height,
+                keyword: options.keyword || {}
+            });
+
+            if (options.autoFormatRange) {
+                var totalLines = editor.lineCount() + 10;
+                editor.autoFormatRange({line: 0, ch: 0}, {line: totalLines});
+                editor.setCursor({line: 0, ch: 0});
+            }
+
+            $("#json-modal-body textarea").removeClass("empty");
+        }
+    });
+
+    $('#shell-modal').on("hidden.bs.modal", function (e) {
+        $("#json-modal-body").html();
+    })
+</script>
+
+<style>
+    #json-modal-body textarea.empty {color: transparent;}
+</style>

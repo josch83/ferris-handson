@@ -1,0 +1,53 @@
+{% from 'ferris/baselib.html' import menu_item %}
+
+{% set menu = appbuilder.menu %}
+{% set languages = appbuilder.languages %}
+
+<aside id="menu">
+    <div id="navigation">
+        <ul class="nav" id="side-menu">
+            {% for item1 in menu.get_list() %}
+                {% if item1 | is_menu_visible %}
+                    {% if item1.childs %}
+                        <li>
+                            <a href="javascript:;">
+                                {% if item1.icon %}
+                                    <i class="fa {{item1.icon}}"></i>&nbsp;
+                                {% endif %}
+                                <span class="nav-label">{{ _(item1.label) }}</span>
+                                <!-- <span class="fa arrow"></span> -->
+                                {% if session[item1.label|lower] %}
+                                    <span class="label label-info pull-right" style="margin-right: 5px;">{{ session[item1.label|lower] }}</span>
+                                {% endif %}
+                            </a>
+
+                            <ul class="nav nav-second-level">
+                                {% for item2 in item1.childs %}
+                                    {% if item2 %}
+                                        {% if item2.name == '-' %}
+                                            {% if not loop.last %}
+                                                <li class="divider"></li>
+                                            {% endif %}
+                                        {% elif item2 | is_menu_visible %}
+                                            <li>
+                                                {{ menu_item(item2) }}
+                                                {#                                                {% if session[item1.label|lower] %}#}
+                                                {#                                                    <span class="label label-info pull-right" style="margin-right: 5px;">{{ session[item1.label|lower] }}</span>#}
+                                                {#                                                {% endif %}#}
+                                            </li>
+
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li>
+                            {{ menu_item(item1) }}
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</aside>
