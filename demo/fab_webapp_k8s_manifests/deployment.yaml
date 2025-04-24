@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: magdemo
+  name: magdemo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: magdemo
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: magdemo
+    spec:
+      imagePullSecrets:
+        - name: harbor-secret
+      containers:
+        
+        
+        - image: hub.ferris.ai/mag/magdemo:0.0.1
+          imagePullPolicy: "Always"
+          name: magdemo
+          # using image default entrypoint
+          volumeMounts:
+          - name: creds-volume
+            readOnly: true
+            mountPath: "/etc/creds-volume"
+          
+          command:
+            - "python3"
+          args: ["/app/ferrisapp/run.py"]
+          env:
+            # The APP_NAME is used for fetching Consul config
+            - name: APP_NAME
+              value: ferris.apps.mag_demo_inst2_db
+            - name: PYTHONPATH
+              value: /app/
+            
+            # Consul infra coordinates
+            - name: CONSUL_HOST
+              value: fx-consul-server.core
+            - name: CONSUL_PORT
+              value: "8500"
+            
+            #  API coordinates. This api contains the data model and is accessed through REST API.
+            - name: MAGDEMO_API_HOST
+              value: http://magdemo-api
+            - name: MAGDEMO_API_PORT
+              value: "80"
+          ports:
+            - containerPort: 8080
+          resources: {}
+      
+      volumes:
+        - name: creds-volume
+          secret:
+            secretName: magdemo-secret
+      
+      restartPolicy: Always
+status: {}
