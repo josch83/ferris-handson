@@ -21,7 +21,7 @@ spec:
       containers:
         
         
-        - image: hub.ferris.ai/mag/magdemo:0.0.1
+        - image: hub.ferris.ai/mag/magdemo:0.0.2
           imagePullPolicy: "Always"
           name: magdemo
           # using image default entrypoint
