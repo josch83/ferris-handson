@@ -6,7 +6,7 @@
 ## 1. Add new version of the magdemo-api-client package if available
 If you generated a new version of the server from  then you probably generated a new version of the client too.
 
-In this case there is a new package for ```magdemo-api-client``` that should be added to this repo as done for ```magdemo-api-client-0.0.1.tar.gz```.
+In this case there is a new package for ```magdemo-api-client``` that should be added to this repo as done for ```magdemo-api-client-0.0.2.tar.gz```.
 
 Different packages versions for ```magdemo-api-client``` can coexists in this repo. It is your job to select the one needed/used.
 ## 2. Select a specific version of magdemo-api-client if needed

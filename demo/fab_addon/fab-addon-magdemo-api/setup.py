@@ -45,7 +45,7 @@ setup(
     python_requires=">=3.10",
     install_requires=[
         "Flask-AppBuilder>=4.2.0",
-        "magdemo-api-client==0.0.1",
+        "magdemo-api-client==0.0.2",
         "minio>=7.1.13",
     ],
     tests_require=[
